@@ -1,0 +1,1501 @@
+<!-- Replace YOUR-DOMAIN.com before launch -->
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How to Password Protect a Thumb Drive — Easy Step-by-Step</title>
+<meta content="Learn how to password protect a thumb drive and secure your portable data. Compare native tools like BitLocker with dedicated software for ultimate USB security." name="description"/>
+<style>
+        :root {
+            --color-bg:              #F8FAFC;
+            --color-surface:         #FFFFFF;
+            --color-dark-surface:    #0F1729;
+            --color-primary-accent:  #2563EB;
+            --color-success:         #059669;
+            --color-warning:         #D97706;
+            --color-danger:          #DC2626;
+            --color-border:          #E2E8F0;
+            --color-body-text:       #0F172A;
+            --color-muted:           #64748B;
+            --color-soft-blue:       rgba(37, 99, 235, 0.08);
+            --color-hero-bg:         #0F1729;
+            --color-secondary-accent:#DBEAFE;
+            --color-content-bg:      #F8FAFC;
+            --color-heading-text:    #0F172A;
+            --color-meta-text:       #64748B;
+
+            --font-heading:          'IBM Plex Sans', sans-serif;
+            --font-body:             'IBM Plex Sans', sans-serif;
+            --font-mono:             'IBM Plex Mono', monospace;
+
+            --max-reading-width:     780px;
+            --max-wide-width:        1080px;
+            --section-padding-v:     72px;
+            --radius-card:           18px;
+            --shadow-card:           0 18px 45px rgba(15, 23, 42, 0.08);
+            --transition-speed:      0.25s;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--color-body-text);
+            background:
+                linear-gradient(90deg, rgba(37,99,235,.04) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(37,99,235,.035) 1px, transparent 1px),
+                var(--color-bg);
+            background-size: 28px 28px;
+            line-height: 1.72;
+            font-size: 17px;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: var(--font-heading);
+            color: var(--color-heading-text);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+        p { margin-bottom: 1.35rem; }
+        a { color: var(--color-primary-accent); text-decoration: none; transition: all var(--transition-speed); }
+        a:hover { color: #1D4ED8; }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-card);
+            object-fit: contain;
+            display: block;
+        }
+        ul, ol { margin-bottom: 1.5rem; padding-left: 1.3rem; }
+        li { margin-bottom: 0.55rem; }
+
+        .container-reading { max-width: var(--max-reading-width); margin: 0 auto; padding: 0 24px; }
+        .container-wide { max-width: var(--max-wide-width); margin: 0 auto; padding: 0 24px; }
+        .container-full { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section-pad { padding: var(--section-padding-v) 0; }
+        .bg-tint {
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.9)),
+                radial-gradient(circle at 20% 10%, rgba(37,99,235,.08), transparent 32%),
+                var(--color-bg);
+            border-top: 1px solid rgba(226,232,240,.75);
+            border-bottom: 1px solid rgba(226,232,240,.75);
+        }
+        .bg-sage {
+            background:
+                radial-gradient(circle at 18% 0%, rgba(37,99,235,.16), transparent 34%),
+                linear-gradient(135deg, #0F1729, #111C34);
+            color: #E2E8F0;
+        }
+        .text-center { text-align: center; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            border: 1px solid transparent;
+            font-size: 15px;
+            box-shadow: 0 10px 24px rgba(15,23,42,.08);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary-accent), #1D4ED8);
+            color: #ffffff !important;
+        }
+        .btn-primary::before { content: "↗"; font-weight: 700; }
+        .btn-primary:hover { transform: translateY(-2px); color: #ffffff; box-shadow: 0 16px 34px rgba(37,99,235,.25); }
+        .btn-outline {
+            background: #ffffff;
+            color: var(--color-primary-accent) !important;
+            border-color: rgba(37,99,235,.28);
+        }
+        .btn-outline:hover { background: rgba(37,99,235,.07); color: #1D4ED8 !important; }
+        .btn-white {
+            background: rgba(255,255,255,.06);
+            color: #ffffff !important;
+            border-color: rgba(255,255,255,.24);
+        }
+        .btn-white:hover { background: #ffffff; color: var(--color-dark-surface) !important; }
+        .label-small, .section-badge, .diff-badge {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: .08em;
+            font-weight: 400;
+            color: var(--color-primary-accent);
+        }
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            background: rgba(37,99,235,.08);
+            border: 1px solid rgba(37,99,235,.18);
+            padding: 6px 12px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+        }
+        .section-badge::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--color-success);
+            box-shadow: 0 0 0 4px rgba(5,150,105,.12);
+        }
+        .section-badge.badge-visible { opacity: 1; transform: translateY(0); }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(248,250,252,.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(226,232,240,.95);
+            padding: 14px 24px;
+            transition: box-shadow var(--transition-speed), background var(--transition-speed);
+        }
+        .site-header.scrolled { box-shadow: 0 10px 30px rgba(15,23,42,.08); background: rgba(255,255,255,.96); }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+        .site-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-body-text);
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+        }
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            flex: 0 0 36px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563EB, #0F1729);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 8px 22px rgba(37,99,235,.28);
+            overflow: hidden;
+        }
+        .brand-logo svg { width: 25px; height: 25px; display: block; }
+        .desktop-nav { display: flex; gap: 22px; align-items: center; }
+        .desktop-nav a { font-size: 14px; font-weight: 600; color: #334155; }
+        .desktop-nav a:hover { color: var(--color-primary-accent); }
+        .mobile-toggle { display: none; background: none; border: 0; font-size: 26px; cursor: pointer; color: var(--color-body-text); }
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: #ffffff;
+            border-bottom: 1px solid var(--color-border);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            padding: 20px 24px;
+            gap: 14px;
+            box-shadow: 0 18px 30px rgba(15,23,42,.08);
+        }
+        .mobile-menu.active { display: flex; }
+
+        .data-summary-bar {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            top: 68px;
+            z-index: 90;
+            width: min(920px, calc(100% - 40px));
+            background: rgba(15,23,41,.96);
+            color: #E2E8F0;
+            border: 1px solid rgba(148,163,184,.25);
+            border-radius: 0 0 18px 18px;
+            box-shadow: 0 22px 50px rgba(15,23,42,.22);
+            backdrop-filter: blur(14px);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            overflow: hidden;
+            transition: transform .28s ease;
+        }
+        .data-summary-bar.visible { transform: translateX(-50%) translateY(0); }
+        .summary-item { padding: 12px 18px; border-right: 1px solid rgba(148,163,184,.18); }
+        .summary-item:last-child { border-right: 0; }
+        .summary-value { font-family: var(--font-mono); color: #93C5FD; font-size: 15px; display: block; }
+        .summary-label { font-family: var(--font-mono); color: #CBD5E1; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+
+        .hero-section {
+            background:
+                radial-gradient(circle at 74% 18%, rgba(37,99,235,.30), transparent 26%),
+                radial-gradient(circle at 12% 8%, rgba(5,150,105,.18), transparent 30%),
+                linear-gradient(135deg, #0F1729 0%, #111C34 52%, #0B1220 100%);
+            color: #CBD5E1;
+            padding: 88px 0 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 44px 44px;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,.95), rgba(0,0,0,.24));
+            pointer-events: none;
+        }
+        .hero-section .container-reading { position: relative; z-index: 1; max-width: 980px; }
+        .breadcrumb {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: #94A3B8;
+            margin-bottom: 24px;
+        }
+        .breadcrumb a { color: #BFDBFE; }
+        .hero-h1 {
+            font-size: clamp(34px, 5vw, 52px);
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            max-width: 870px;
+        }
+        .hero-section p { color: #CBD5E1; }
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: #94A3B8;
+            margin-bottom: 28px;
+            border-bottom: 1px solid rgba(148,163,184,.24);
+            padding-bottom: 20px;
+        }
+        .hero-meta span {
+            padding: 4px 10px;
+            border: 1px solid rgba(148,163,184,.22);
+            border-radius: 999px;
+            background: rgba(255,255,255,.03);
+        }
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 30px 0 34px;
+        }
+        .metric-card {
+            background: rgba(15,23,41,.82);
+            border: 1px solid rgba(148,163,184,.22);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+        }
+        .metric-card::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            display: block;
+            margin-bottom: 12px;
+            background: var(--metric-color, var(--color-primary-accent));
+            box-shadow: 0 0 0 5px color-mix(in srgb, var(--metric-color, var(--color-primary-accent)) 18%, transparent);
+        }
+        .metric-number {
+            display: block;
+            font-family: var(--font-mono);
+            color: #FFFFFF;
+            font-size: 26px;
+            line-height: 1.1;
+        }
+        .metric-label {
+            display: block;
+            margin-top: 6px;
+            font-family: var(--font-mono);
+            color: #94A3B8;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+        .hero-section img {
+            width: 100% !important;
+            max-height: 380px !important;
+            object-fit: contain !important;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(148,163,184,.2);
+            box-shadow: 0 22px 55px rgba(0,0,0,.22);
+        }
+        .quick-answer {
+            background: rgba(255,255,255,.96);
+            color: var(--color-body-text);
+            border: 1px solid rgba(226,232,240,.95);
+            border-left: 5px solid var(--color-success);
+            padding: 24px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-card);
+        }
+        .quick-answer h3 {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--color-success);
+        }
+        .quick-answer p, .quick-answer strong { color: var(--color-body-text); }
+        .quick-answer p:last-child { margin-bottom: 0; }
+
+        .toc-card, .quiz-container, .pricing-prose, .comp-v5-table {
+            background: rgba(255,255,255,.94);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+        }
+        .toc-card { padding: 30px; margin: 10px 0 0; }
+        .toc-card h3 {
+            font-size: 18px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+        .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .toc-grid a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            background: #F8FAFC;
+            border: 1px solid var(--color-border);
+            border-radius: 14px;
+            padding: 12px 14px;
+        }
+        .toc-grid a::before { content: '→'; color: var(--color-primary-accent); font-weight: 700; }
+
+        .content-visual {
+            margin: 30px 0;
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            border-radius: 22px;
+            padding: 12px;
+            box-shadow: 0 16px 38px rgba(15,23,42,.08);
+        }
+        .content-visual img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            background: #F8FAFC;
+        }
+        .content-visual.compact img { max-height: 320px; }
+        .content-visual.tall img { max-height: 520px; }
+
+        .quiz-container { padding: 30px; margin: 20px 0; }
+        .quiz-container h3 { margin-top: 8px; }
+        .quiz-step { display: none; }
+        .quiz-step.active { display: block; }
+        .quiz-options { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
+        .quiz-btn {
+            background: #F8FAFC;
+            border: 1px solid var(--color-border);
+            padding: 16px;
+            border-radius: 14px;
+            text-align: left;
+            font-family: var(--font-body);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .quiz-btn:hover { border-color: var(--color-primary-accent); background: var(--color-soft-blue); transform: translateX(4px); }
+        .quiz-result { padding: 22px; background: rgba(37,99,235,.08); border-radius: 14px; border-left: 4px solid var(--color-primary-accent); }
+
+        .methods-dashboard {
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+        .method-head, .method-summary {
+            display: grid;
+            grid-template-columns: 1.7fr .9fr .8fr .8fr;
+            gap: 0;
+            align-items: center;
+        }
+        .method-head {
+            background: #F1F5F9;
+            color: var(--color-muted);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .method-head span { padding: 14px 18px; border-right: 1px solid var(--color-border); }
+        .method-head span:last-child { border-right: 0; }
+        .method-row { border-bottom: 1px solid var(--color-border); }
+        .method-row:last-child { border-bottom: 0; }
+        .method-summary {
+            width: 100%;
+            border: 0;
+            background: #ffffff;
+            text-align: left;
+            cursor: pointer;
+            font: inherit;
+            color: inherit;
+            transition: background .2s;
+        }
+        .method-summary:hover { background: #F8FAFC; }
+        .method-summary > span {
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            border-right: 1px solid var(--color-border);
+        }
+        .method-summary > span:last-child { border-right: 0; }
+        .method-name {
+            font-weight: 700;
+            color: var(--color-body-text);
+            position: relative;
+            padding-left: 34px !important;
+        }
+        .method-name::before {
+            content: "+";
+            width: 22px;
+            height: 22px;
+            display: grid;
+            place-items: center;
+            position: absolute;
+            left: 18px;
+            border-radius: 999px;
+            background: rgba(37,99,235,.1);
+            color: var(--color-primary-accent);
+            font-weight: 700;
+        }
+        .method-row.active .method-name::before { content: "–"; }
+        .method-mono { font-family: var(--font-mono); font-size: 13px; color: var(--color-muted); }
+        .method-security.good { color: var(--color-success); }
+        .method-security.warn { color: var(--color-warning); }
+        .method-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .36s ease;
+            background: #FBFDFF;
+        }
+        .method-row.active .method-detail { max-height: 900px; }
+        .method-detail-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(240px, .85fr);
+            gap: 26px;
+            padding: 26px;
+            border-top: 1px solid var(--color-border);
+        }
+        .method-copy p:last-child, .method-copy ul:last-child { margin-bottom: 0; }
+        .method-visual {
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            border-radius: 18px;
+            padding: 12px;
+            display: grid;
+            gap: 12px;
+            align-content: start;
+        }
+        .method-visual img {
+            width: 100%;
+            max-height: 260px;
+            object-fit: contain;
+            background: #F8FAFC;
+        }
+        .method-visual-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            text-align: center;
+        }
+
+        .saas-moment {
+            background:
+                radial-gradient(circle at 78% 12%, rgba(37,99,235,.28), transparent 30%),
+                linear-gradient(135deg, #0F1729 0%, #111C34 100%);
+            color: #E2E8F0;
+            padding: 84px 0;
+            margin: 0;
+            text-align: center;
+        }
+        .saas-moment h2, .saas-moment h3, .saas-moment h4, .saas-moment .font-heading { color: #ffffff; }
+        .saas-text { color: #CBD5E1; font-size: 18px; max-width: 720px; margin: 0 auto 36px; }
+        .mockup-container {
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(148,163,184,.24);
+            border-radius: 24px;
+            padding: 20px;
+            max-width: 960px;
+            margin: 0 auto 34px;
+            box-shadow: 0 26px 70px rgba(0,0,0,.25);
+        }
+        .mockup-container img {
+            width: 100% !important;
+            max-height: 420px;
+            object-fit: contain !important;
+            background: #FFFFFF;
+            border: 1px solid rgba(226,232,240,.35);
+        }
+        .feature-chips { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 34px; }
+        .chip {
+            font-family: var(--font-mono);
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(148,163,184,.24);
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #E2E8F0;
+        }
+        .saas-ctas { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+        .feature-v2-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+        .feature-v2-item {
+            display: grid;
+            grid-template-columns: 58px 1fr;
+            gap: 18px;
+            align-items: flex-start;
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: var(--shadow-card);
+        }
+        .feature-num {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            line-height: 1;
+            color: var(--color-primary-accent);
+            font-weight: 400;
+        }
+        .feature-v2-item h3::before {
+            content: "CATEGORY";
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: .08em;
+            color: var(--color-muted);
+            margin-bottom: 6px;
+        }
+        .feature-v2-item:nth-child(3) { grid-column: 1 / -1; }
+
+        .coverage-panel {
+            margin: 0 0 32px;
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: var(--shadow-card);
+        }
+        .coverage-map {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+        }
+        .coverage-map span {
+            aspect-ratio: 1 / 1;
+            border-radius: 6px;
+            background: #E2E8F0;
+            transform: scale(.9);
+            opacity: .55;
+        }
+        .coverage-panel.coverage-visible .coverage-map span {
+            animation: coverageFill .55s ease forwards;
+            animation-delay: calc(var(--i) * 32ms);
+        }
+        @keyframes coverageFill {
+            to { background: var(--color-primary-accent); opacity: 1; transform: scale(1); box-shadow: 0 8px 18px rgba(37,99,235,.22); }
+        }
+
+        .comp-v5-wrapper { overflow-x: auto; margin: 34px 0; border-radius: 20px; }
+        .comp-v5-table { width: 100%; border-collapse: collapse; text-align: left; overflow: hidden; }
+        .comp-v5-table th, .comp-v5-table td {
+            padding: 15px 18px;
+            border-bottom: 1px solid var(--color-border);
+            transition: background .18s ease;
+        }
+        .comp-v5-table th {
+            background: #F1F5F9;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--color-muted);
+            font-weight: 400;
+        }
+        .comp-v5-table tr:last-child td { border-bottom: 0; }
+        .comp-v5-table .is-col-hover { background: rgba(37,99,235,.08) !important; }
+        .tag-verdict {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 400;
+            background: rgba(5,150,105,.1);
+            color: var(--color-success);
+        }
+        .tag-verdict::before { content: "✓"; }
+        .tag-verdict.warn { background: rgba(217,119,6,.1); color: var(--color-warning); }
+        .tag-verdict.warn::before { content: "△"; }
+        .cell-good { color: var(--color-success); font-weight: 700; }
+        .cell-partial { color: var(--color-warning); font-weight: 700; }
+        .cell-missing { color: var(--color-danger); font-weight: 700; }
+
+        .tutorial-panel ol {
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            border-radius: 22px;
+            padding: 26px 26px 26px 50px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .pricing-prose {
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            overflow: hidden;
+        }
+        .pricing-matrix-head, .pricing-tier {
+            display: grid;
+            grid-template-columns: .8fr 1.7fr .8fr;
+            align-items: stretch;
+        }
+        .pricing-matrix-head {
+            background: #F1F5F9;
+            font-family: var(--font-mono);
+            color: var(--color-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .pricing-matrix-head span, .pricing-tier > * {
+            padding: 20px;
+            border-right: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+        }
+        .pricing-matrix-head span:last-child, .pricing-tier > *:last-child { border-right: 0; }
+        .pricing-tier { border-bottom: 1px solid var(--color-border); }
+        .pricing-tier:last-child { border-bottom: 0; }
+        .pricing-tier h4 { font-size: 21px; margin: 0; border: 0; padding: 20px; }
+        .pricing-tier p { margin: 0; }
+        .pricing-tier .btn { width: 100%; margin-top: 0 !important; }
+
+        .testi-v1 {
+            font-family: var(--font-heading);
+            font-size: 27px;
+            line-height: 1.45;
+            color: var(--color-body-text);
+            text-align: center;
+            max-width: 840px;
+            margin: 0 auto 34px;
+            position: relative;
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 34px;
+            box-shadow: var(--shadow-card);
+        }
+        .testi-v1::before {
+            content: '“';
+            font-size: 72px;
+            color: rgba(37,99,235,.18);
+            position: absolute;
+            top: -18px;
+            left: 18px;
+            z-index: 0;
+        }
+        .testi-author { text-align: center; font-size: 16px; font-weight: 600; color: var(--color-muted); }
+
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 230px minmax(0, 1fr);
+            gap: 28px;
+            margin-top: 36px;
+        }
+        .faq-filter {
+            position: sticky;
+            top: 110px;
+            align-self: start;
+            display: grid;
+            gap: 10px;
+        }
+        .faq-filter button {
+            border: 1px solid var(--color-border);
+            background: #FFFFFF;
+            color: var(--color-body-text);
+            border-radius: 999px;
+            padding: 12px 14px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            cursor: pointer;
+            text-align: left;
+            transition: all .2s;
+        }
+        .faq-filter button.active,
+        .faq-filter button:hover {
+            background: var(--color-primary-accent);
+            color: #FFFFFF;
+            border-color: var(--color-primary-accent);
+        }
+        .faq-v5-grid { display: grid; gap: 14px; }
+        .chat-row {
+            display: grid;
+            gap: 0;
+            max-width: 100%;
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 14px 30px rgba(15,23,42,.06);
+        }
+        .chat-row.hidden { display: none; }
+        .chat-q {
+            background: #F1F5F9;
+            padding: 16px 18px;
+            border-radius: 0;
+            font-weight: 700;
+            color: var(--color-body-text);
+            align-self: auto;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .chat-a {
+            background: #ffffff;
+            border: 0;
+            padding: 18px;
+            border-radius: 0;
+            align-self: auto;
+            box-shadow: none;
+        }
+
+        .site-footer {
+            background: #0F1729;
+            color: #CBD5E1;
+            padding: 64px 24px;
+            font-size: 14px;
+        }
+        .site-footer a { color: #BFDBFE; }
+        .site-footer h4 { color: #ffffff !important; }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 40px;
+        }
+        .footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+        .footer-brand .brand-logo { width: 42px; height: 42px; flex-basis: 42px; }
+        .footer-brand h4 { margin: 0 !important; }
+        .footer-legal { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); text-align: center; color: #94A3B8; }
+        .footer-legal p { margin-bottom: 12px; }
+
+        @media (max-width: 900px) {
+            .desktop-nav { display: none; }
+            .mobile-toggle { display: block; }
+            .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+            .data-summary-bar { display: none; }
+            .method-head { display: none; }
+            .method-summary, .method-detail-inner {
+                grid-template-columns: 1fr;
+            }
+            .method-summary > span {
+                border-right: 0;
+                border-bottom: 1px solid var(--color-border);
+                min-height: auto;
+                padding: 12px 18px;
+            }
+            .method-summary > span:last-child { border-bottom: 0; }
+            .method-name { padding-left: 48px !important; }
+            .method-name::before { left: 18px; }
+            .feature-v2-grid, .pricing-matrix-head, .pricing-tier, .faq-layout { grid-template-columns: 1fr; }
+            .feature-v2-item:nth-child(3) { grid-column: auto; }
+            .pricing-matrix-head { display: none; }
+            .pricing-tier > * { border-right: 0; border-bottom: 1px solid var(--color-border); }
+            .pricing-tier > *:last-child { border-bottom: 0; }
+            .faq-filter {
+                position: static;
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 4px;
+            }
+            .faq-filter button { white-space: nowrap; }
+            .coverage-map { grid-template-columns: repeat(8, 1fr); }
+            .coverage-map span:nth-child(n+41) { display: none; }
+        }
+        @media (max-width: 640px) {
+            body { font-size: 16px; }
+            .site-header { padding: 12px 18px; }
+            .site-title { font-size: 16px; }
+            .brand-logo { width: 32px; height: 32px; flex-basis: 32px; }
+            .section-pad { padding: 52px 0; }
+            .container-reading, .container-wide, .container-full { padding: 0 18px; }
+            .hero-section { padding: 68px 0 52px; }
+            .hero-h1 { font-size: 34px; }
+            .hero-metrics, .toc-grid { grid-template-columns: 1fr; }
+            .saas-ctas { flex-direction: column; }
+            .btn { width: 100%; }
+            .testi-v1 { font-size: 22px; padding: 26px; }
+        }
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="site-header" id="header">
+<div class="header-inner">
+<a class="site-title" href="/">
+<span aria-hidden="true" class="brand-logo">
+<svg focusable="false" role="img" viewbox="0 0 64 64">
+<path d="M32 6l20 8v15c0 13.4-8.2 23.8-20 29-11.8-5.2-20-15.6-20-29V14l20-8z" fill="#ffffff" opacity=".95"></path>
+<path d="M22 30h20v16H22z" fill="#2563EB"></path>
+<path d="M25 30v-6a7 7 0 0 1 14 0v6" fill="none" stroke="#0F1729" stroke-linecap="round" stroke-width="5"></path>
+<circle cx="32" cy="38" fill="#0F1729" r="3"></circle>
+</svg>
+</span>
+<span>Thumb Drive Security Hub</span></a>
+<nav class="desktop-nav">
+<a href="#guide">Methods Guide</a>
+<a href="#tutorial">Tutorial</a>
+<a href="#troubleshooting">Troubleshooting</a>
+<a href="#faq">FAQ</a>
+<a class="btn btn-primary" href="#recommendation" style="padding: 8px 20px;">See Our Top Pick →</a>
+</nav>
+<button class="mobile-toggle" id="mobile-toggle">☰</button>
+</div>
+<nav class="mobile-menu" id="mobile-menu">
+<a href="#guide">Methods Guide</a>
+<a href="#tutorial">Tutorial</a>
+<a href="#troubleshooting">Troubleshooting</a>
+<a href="#faq">FAQ</a>
+</nav>
+</header>
+<div aria-label="Portable data security summary" class="data-summary-bar" id="data-summary-bar">
+<div class="summary-item"><span class="summary-value">4</span><span class="summary-label">Methods compared</span></div>
+<div class="summary-item"><span class="summary-value">AES 256-bit</span><span class="summary-label">Encryption focus</span></div>
+<div class="summary-item"><span class="summary-value">Mac / Win</span><span class="summary-label">Platform context</span></div>
+</div>
+
+<!-- Hero S1 -->
+<section class="hero-section">
+<div class="container-reading">
+<div class="breadcrumb">
+<a href="/">Home</a> / <a href="/security">USB Security</a> / Password Protection
+            </div>
+<h1 class="hero-h1">How to Password Protect a Thumb Drive — Easy Step-by-Step</h1>
+<p style="font-size: 19px; margin-bottom: 24px;">Losing a thumb drive doesn't have to mean a data breach. Learn how to lock down your portable storage using built-in operating system tools or dedicated security software, ensuring your private files remain completely inaccessible to unauthorized users.</p>
+<div class="hero-meta">
+<span>Editorial Team</span>
+<span>Updated: March 2026</span>
+<span>12 min read</span>
+</div>
+<div aria-label="Dashboard metrics" class="hero-metrics">
+<div class="metric-card" style="--metric-color:#2563EB"><span class="metric-number" data-count="4">0</span><span class="metric-label">Methods Compared</span></div>
+<div class="metric-card" style="--metric-color:#059669"><span class="metric-number" data-count="256" data-prefix="AES " data-suffix="-bit">0</span><span class="metric-label">Protection Standard</span></div>
+<div class="metric-card" style="--metric-color:#D97706"><span class="metric-number" data-count="2">0</span><span class="metric-label">Platform Versions</span></div>
+<div class="metric-card" style="--metric-color:#2563EB"><span class="metric-number" data-count="70">0</span><span class="metric-label">File Types Supported</span></div>
+</div>
+
+<div style="margin-bottom: 40px; text-align: center;">
+<img alt="Folder Lock 10 promotional banner for military-grade thumb drive and USB data security" loading="eager" src="https://i.ibb.co/C3dwdr7Z/folder-lock-10-promotional-poster-newsoftwares.jpg" style="width: 100%; height: auto; object-fit: contain; border-radius: var(--radius-card); box-shadow: var(--shadow-card);"/>
+</div>
+<div class="quick-answer">
+<h3>Quick Answer</h3>
+<p>To securely password protect a thumb drive, you can use built-in tools like <strong><a href="https://windowsreport.com/encrypt-usb-flash-drive-windows/" rel="noopener noreferrer" target="_blank">Windows BitLocker to Go</a></strong> or third-party military-grade encryption software like <strong><a href="https://aijourn.com/newsoftwares-llc-releases-folder-lock-10-1-13-for-windows-and-launches-first-macos-edition/" rel="noopener noreferrer" target="_blank">Folder Lock</a></strong>. For users who need to access their locked files on both Mac and Windows without formatting issues, a dedicated third-party tool featuring "Portable Lockers" is the most reliable choice.</p>
+</div>
+</div>
+</section>
+<!-- TOC S2 -->
+<section class="section-pad">
+<div class="container-reading">
+<div class="toc-card">
+<h3>In This Guide</h3>
+<div class="toc-grid">
+<a href="#overview">Thumb Drive vs Flash Drive Basics</a>
+<a href="#guide">Complete Methods Guide</a>
+<a href="#recommendation">The Tool We Recommend</a>
+<a href="#comparison">Methods Comparison Table</a>
+<a href="#tutorial">Step-by-Step Tutorial</a>
+<a href="#troubleshooting">Troubleshooting &amp; Recovery</a>
+<a href="#pricing">Free vs Full Version Setup</a>
+<a href="#faq">Frequently Asked Questions</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Overview S3 -->
+<section class="section-pad bg-tint" id="overview">
+<div class="container-reading">
+<span class="section-badge">Essential Context</span>
+<h2>Why USB Drives Are a Major Security Risk</h2>
+<p>Portable storage is incredibly convenient, but its physical size is its biggest vulnerability. Thumb drives are easily dropped, left in public computers, or stolen from bags. If you aren't using thumb drive password protection, whoever finds your drive has immediate access to your tax returns, work documents, and personal photos.</p><figure class="content-visual compact"><img alt="Password protected USB drive concept for securing portable files" loading="lazy" src="https://i.ibb.co/LdT6nPBq/the-USB-drive.jpg"/></figure>
+<h3>Thumb Drive vs. USB Drive vs. Flash Drive</h3>
+<p>Before we dive into the methods, let's clarify the terminology. You might see terms like "thumb drive," "flash drive," "pen drive," and "USB drive" used interchangeably. Technically, they all refer to the same thing: solid-state portable storage that connects via a USB port. Whether your device is branded by SanDisk, Kingston, or a generic vendor, the methods for applying a <a href="https://techleez.co.uk/why-you-should-password-protect-your-usb-drive/" rel="noopener noreferrer" target="_blank">password protect usb drive</a> protocol remain identical.</p>
+<h3>How Do I Password Protect a Thumb Drive?</h3>
+<p>There are two primary ways to secure your drive: <strong>Software encryption</strong> and <strong>Hardware encryption</strong>. Hardware-encrypted drives have a physical keypad or built-in chip, but they are expensive and must be purchased new. Software encryption, which we cover in this guide, allows you to take any standard, cheap thumb drive you already own and lock it down using strong cryptographic algorithms (like <a href="https://psbios.com/file-encryption-explained/" rel="noopener noreferrer" target="_blank">AES 256-bit</a>).</p><figure class="content-visual compact"><img alt="Encryption explainer visual showing how private files are protected with cryptography" loading="lazy" src="https://i.ibb.co/gZ8Tcbqc/what-is-encryption-complete-explainer-for-beginners.jpg"/></figure>
+</div>
+</section>
+<!-- Interactive Quiz -->
+<section class="section-pad">
+<div class="container-reading">
+<div class="quiz-container" id="usb-quiz">
+<span class="label-small">Decision Helper</span>
+<h3 style="margin-top: 8px;">Which protection method is right for you?</h3><figure class="content-visual compact"><img alt="Security dashboard illustration showing locked files across portable devices" loading="lazy" src="https://i.ibb.co/ZC5xRkQ/data-security-devices-lock-illustration.png"/></figure>
+<div class="quiz-step active" id="step-1">
+<p>Where will you need to open this password-protected thumb drive?</p>
+<div class="quiz-options">
+<button class="quiz-btn" onclick="nextQuiz('step-2', 'windows')">Only on my personal Windows 10/11 PC</button>
+<button class="quiz-btn" onclick="nextQuiz('step-2', 'cross')">On different computers, including Macs or public PCs</button>
+</div>
+</div>
+<div class="quiz-step" id="step-2">
+<p>What is your budget for securing your files?</p>
+<div class="quiz-options">
+<button class="quiz-btn" onclick="showResult('bitlocker')">I need it to be completely free.</button>
+<button class="quiz-btn" onclick="showResult('software')">I'm willing to pay ~$40 for premium cross-platform software.</button>
+<button class="quiz-btn" onclick="showResult('hardware')">I can buy a brand new, expensive hardware-encrypted drive.</button>
+</div>
+</div>
+<div class="quiz-step" id="result-step">
+<div class="quiz-result" id="quiz-output"></div>
+<button class="btn btn-outline" onclick="resetQuiz()" style="margin-top: 20px; padding: 8px 16px; font-size: 14px;">Start Over</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Methods Guide S4 -->
+<section class="section-pad bg-tint" id="guide">
+<div class="container-wide">
+<span class="section-badge">Step-by-Step Approaches</span>
+<h2 class="text-center" style="margin-bottom: 48px;">How to Password Protect a Thumb Drive</h2><div class="methods-dashboard">
+<div class="method-head">
+<span>Method</span><span>Difficulty</span><span>Security</span><span>Cost</span>
+</div>
+<article class="method-row active"><button aria-expanded="true" class="method-summary" type="button"><span class="method-name">Method 1: Windows BitLocker to Go</span><span class="method-mono">Difficulty: Moderate</span><span class="method-mono method-security good">High</span><span class="method-mono">Free (Win Pro only)</span></button><div class="method-detail"><div class="method-detail-inner"><div class="method-copy">
+
+
+<p>If you are using a Windows 10 or Windows 11 Professional, Enterprise, or Education edition, you have a built-in tool called BitLocker. "BitLocker to Go" specifically targets removable storage.</p>
+<ul>
+<li><strong>How it works:</strong> It encrypts the entire volume of the thumb drive. You must enter the password in Windows Explorer before you can view any files.</li>
+<li><strong>Best for:</strong> Users who strictly stay within the modern Windows ecosystem and don't want to install third-party apps.</li>
+<li><strong>Limitations:</strong> It is not available on Windows 10/11 Home editions. Crucially, a BitLocker drive cannot be natively opened on a Mac or a Chromebook, heavily restricting cross-platform usage.</li>
+</ul>
+</div><div class="method-visual"><img alt="Windows File Explorer view for BitLocker to Go USB drive password protection" loading="lazy" src="https://i.ibb.co/35v0S8cp/Windows-file-explorer.jpg"/><div class="method-visual-label">Native OS Encryption</div></div></div></div></article><article class="method-row"><button aria-expanded="false" class="method-summary" type="button"><span class="method-name">Method 2: Third-Party Security Software</span><span class="method-mono">Difficulty: Easy</span><span class="method-mono method-security good">AES 256-bit</span><span class="method-mono">Paid License</span></button><div class="method-detail"><div class="method-detail-inner"><div class="method-copy">
+
+
+<p>For users needing flexibility, <a href="https://mspoweruser.com/secure-your-data-top-usb-password-protection-tools/" rel="noopener noreferrer" target="_blank">dedicated USB security software</a> is the superior route. Tools like Folder Lock allow you to create isolated, encrypted containers ("Portable Lockers") on the thumb drive.</p>
+<ul>
+<li><strong>How it works:</strong> Instead of formatting the whole drive, the software generates an AES 256-bit encrypted executable vault on the USB stick. You launch the vault, enter your password, and access your files.</li>
+<li><strong>Best for:</strong> Users who need cross-platform access, share computers, or use Windows Home edition.</li>
+<li><strong>Limitations:</strong> While basic locking might be free, the highest-tier military-grade portable encryption usually requires a paid license (e.g., ~$40 for a lifetime key).</li>
+</ul>
+<div style="margin-top: 24px;">
+<img alt="USB Secure conceptual artwork demonstrating robust password protection for portable removable drives" loading="lazy" src="https://i.ibb.co/HDWkbpWN/usb-secure-img.png" style="width: 100%; height: auto; object-fit: contain; border-radius: 8px;"/>
+</div>
+</div><div class="method-visual"><img alt="USB security software illustration for creating password protected portable lockers" loading="lazy" src="https://i.ibb.co/HDWkbpWN/usb-secure-img.png"/><div class="method-visual-label">Portable AES-256 Lockers</div></div></div></div></article></div>
+
+
+</div>
+</section>
+<!-- Why Recommend S5 (Premium SaaS Moment) -->
+<section class="saas-moment" id="recommendation">
+<div class="container-full">
+<h2>The Tool We Recommend for Most Users</h2>
+<p class="saas-text">Of all the options we covered, here is why we recommend <strong>Folder Lock</strong>. It bypasses the OS restrictions of BitLocker and provides genuine AES 256-bit encryption that travels with your drive.</p>
+<div class="mockup-container">
+<div style="margin-bottom: 24px;">
+<img alt="Folder Lock software interface displaying encrypted portable lockers and AES 256-bit protection status" loading="lazy" src="https://i.ibb.co/Q713yG79/Folder-Lock-locker.jpg" style="width: 100%; height: auto; object-fit: contain; border-radius: 6px;"/>
+</div>
+<!-- Using stylized text representation for screenshot layout as per rules to avoid broken images -->
+<div style="background: var(--color-content-bg); border-radius: 8px; padding: 20px; color: var(--color-body-text); text-align: left;">
+<div style="display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 16px; margin-bottom: 16px;">
+<div style="width: 40px; height: 40px; background: var(--color-primary-accent); border-radius: 8px;"></div>
+<div>
+<h4 style="margin: 0;">Folder Lock 10</h4>
+<span style="font-size: 12px; color: var(--color-meta-text);">Portable Locker Setup</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px;">
+<div style="background: var(--color-hero-bg); padding: 16px; border-radius: 6px;">
+<ul style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+<li style="margin-bottom: 12px; font-weight: 600;">🔒 Protect USB Drive</li>
+<li style="margin-bottom: 12px;">📁 Encrypt Files</li>
+<li>☁️ Secure Backup</li>
+</ul>
+</div>
+<div style="background: #ffffff; border: 1px solid var(--color-border); padding: 24px; border-radius: 6px; text-align: center;">
+<h3 style="color: var(--color-heading-text); font-size: 18px;">Create Portable Locker</h3>
+<p style="font-size: 14px; margin-bottom: 20px;">Select your USB Thumb Drive to create an encrypted executable container.</p>
+<div style="background: var(--color-secondary-accent); color: var(--color-primary-accent); padding: 10px; border-radius: 4px; font-weight: bold; font-size: 14px;">AES 256-Bit Protection Active</div>
+</div>
+</div>
+</div>
+<figure class="content-visual compact"><img alt="Folder Lock 10 portable lockers screenshot for securing USB thumb drives" loading="lazy" src="https://i.ibb.co/wNkcx3WC/folder-lock-10-screenshot-safeguard-portable-lockers.png"/></figure></div>
+<div class="feature-chips">
+<span class="chip">Cross-Platform Executable</span>
+<span class="chip">Military-Grade AES 256-bit</span>
+<span class="chip">No Admin Rights Needed to Open</span>
+</div>
+<div class="saas-ctas">
+<a class="btn btn-primary" href="https://www.newsoftwares.net/ns_download/folderlock10-en/folderlock10-en.exe" rel="noopener noreferrer" target="_blank">Try Folder Lock Free →</a>
+<a class="btn btn-outline" href="https://store.newsoftwares.net/?add=fl10" rel="noopener noreferrer" target="_blank">Get the Full Version →</a>
+</div>
+<p style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 16px;">Developed by NewSoftwares.net. Works on Windows 10/11 &amp; Mac.</p>
+</div>
+</section>
+<!-- Features S7 (V2 Oversized) -->
+<section class="section-pad">
+<div class="container-reading">
+<span class="section-badge">At a glance</span>
+<h2>Why Dedicated Software Outperforms OS Tools</h2>
+<p>Relying on built-in OS tools often leads to formatting headaches when switching between a PC and a Mac. Here is what a dedicated tool like Folder Lock brings to the table.</p>
+<div class="coverage-panel"><div aria-label="Protection coverage map visualization" class="coverage-map"><span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span><span style="--i:8"></span><span style="--i:9"></span><span style="--i:10"></span><span style="--i:11"></span><span style="--i:12"></span><span style="--i:13"></span><span style="--i:14"></span><span style="--i:15"></span><span style="--i:16"></span><span style="--i:17"></span><span style="--i:18"></span><span style="--i:19"></span><span style="--i:20"></span><span style="--i:21"></span><span style="--i:22"></span><span style="--i:23"></span><span style="--i:24"></span><span style="--i:25"></span><span style="--i:26"></span><span style="--i:27"></span><span style="--i:28"></span><span style="--i:29"></span><span style="--i:30"></span><span style="--i:31"></span><span style="--i:32"></span><span style="--i:33"></span><span style="--i:34"></span><span style="--i:35"></span><span style="--i:36"></span><span style="--i:37"></span><span style="--i:38"></span><span style="--i:39"></span><span style="--i:40"></span><span style="--i:41"></span><span style="--i:42"></span><span style="--i:43"></span><span style="--i:44"></span><span style="--i:45"></span><span style="--i:46"></span><span style="--i:47"></span><span style="--i:48"></span><span style="--i:49"></span><span style="--i:50"></span><span style="--i:51"></span><span style="--i:52"></span><span style="--i:53"></span><span style="--i:54"></span><span style="--i:55"></span><span style="--i:56"></span><span style="--i:57"></span><span style="--i:58"></span><span style="--i:59"></span><span style="--i:60"></span><span style="--i:61"></span><span style="--i:62"></span><span style="--i:63"></span><span style="--i:64"></span><span style="--i:65"></span><span style="--i:66"></span><span style="--i:67"></span><span style="--i:68"></span><span style="--i:69"></span></div></div><div class="feature-v2-grid">
+<div class="feature-v2-item">
+<div class="feature-num">1</div>
+<div>
+<h3>Portable Executable Lockers</h3>
+<p>Unlike BitLocker which formats the whole drive, Folder Lock creates a standalone, self-extracting secure container. You can run this container on a host PC directly from the thumb drive without needing to install the software on the host machine.</p>
+</div>
+</div>
+<div class="feature-v2-item">
+<div class="feature-num">2</div>
+<div>
+<h3>Military-Grade Encryption Standard</h3>
+<p>Your files aren't just "hidden" behind a password dialog; they are mathematically scrambled using AES 256-bit encryption. Even if a thief uses raw data recovery software, all they will extract is unreadable ciphertext.</p>
+</div>
+</div>
+<div class="feature-v2-item">
+<div class="feature-num">3</div>
+<div>
+<h3>Ecosystem Syncing (Pro Feature)</h3>
+<p>While your thumb drive holds the physical data, Folder Lock Pro allows you to sync your lockers across up to 5 devices, meaning you have a secure cloud backup of your USB data accessible via their iOS or Android mobile apps.</p>
+</div>
+</div>
+</div><figure class="content-visual compact"><img alt="Data security software platforms visual showing encrypted file protection ecosystem" loading="lazy" src="https://i.ibb.co/k24BgXfS/data-security-software-platforms.png"/></figure>
+<figure class="content-visual compact"><img alt="Secure virtual drive illustration for encrypted thumb drive lockers" loading="lazy" src="https://i.ibb.co/q3LHT6Kb/Secure-Virtual-Drive.jpg"/></figure></div>
+</section>
+<!-- Comparison S8 (V5 Tag Cloud) -->
+<section class="section-pad bg-tint" id="comparison">
+<div class="container-wide">
+<span class="section-badge">Head to Head</span>
+<h2>Thumb Drive Protection Method Comparison</h2>
+<div class="comp-v5-wrapper">
+<table class="comp-v5-table">
+<thead>
+<tr>
+<th>Method</th>
+<th>Cost</th>
+<th>Cross-Platform (Mac/Win)</th>
+<th>Security Level</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows BitLocker to Go</strong></td>
+<td>Free (Win Pro only)</td>
+<td class="cell-missing">No</td>
+<td>High</td>
+<td class="cell-partial"><span class="tag-verdict warn">Limited Use</span></td>
+</tr>
+<tr>
+<td><strong>Folder Lock (Portable Lockers)</strong></td>
+<td>Paid License</td>
+<td class="cell-good">Yes</td>
+<td class="cell-good">AES 256-bit</td>
+<td class="cell-good"><span class="tag-verdict">Best Overall</span></td>
+</tr>
+<tr>
+<td><strong>Hardware Encrypted Drive</strong></td>
+<td>$80 - $200+</td>
+<td class="cell-good">Yes</td>
+<td>High (Hardware)</td>
+<td><span class="tag-verdict">Best for Enterprise</span></td>
+</tr>
+<tr>
+<td><strong>ZIP / 7-Zip Password Protect</strong></td>
+<td>Free</td>
+<td class="cell-good">Yes</td>
+<td class="cell-partial">Basic</td>
+<td class="cell-partial"><span class="tag-verdict warn">Too Slow for Daily Use</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="content-visual compact"><img alt="USB disk security software comparison visual for removable drive protection" loading="lazy" src="https://i.ibb.co/TDtqFLT2/usb-disk-security-software.jpg"/></figure></div>
+</section>
+<!-- Tutorial S9 -->
+<section class="section-pad tutorial-panel" id="tutorial">
+<div class="container-reading">
+<span class="section-badge">Step by step</span>
+<h2>How to Password Protect a Thumb Drive Using Folder Lock</h2>
+<p>If you've opted for our recommended approach, here is exactly how to lock down your <a href="https://www.analyticsinsight.net/tech-news/how-to-encrypt-and-protect-usb-flash-drives-external-drives-and-memory-cards" rel="noopener noreferrer" target="_blank">USB flash drive</a> in under 5 minutes.</p>
+<ol style="margin-top: 32px;">
+<li style="margin-bottom: 24px;">
+<strong>Install the Software:</strong> <a href="https://www.newsoftwares.net/ns_download/folderlock10-en/folderlock10-en.exe" rel="noopener noreferrer" target="_blank">Download the free trial of Folder Lock</a> and install it on your primary Windows PC.
+                </li>
+<li style="margin-bottom: 24px;">
+<strong>Insert your Thumb Drive:</strong> Plug your USB drive into an available port. Ensure it is recognized by Windows Explorer.
+                </li>
+<li style="margin-bottom: 24px;">
+<strong>Create a Portable Locker:</strong> Open Folder Lock and navigate to the 'Protect USB/CD' or 'Portable Lockers' section. Follow the wizard to create a new locker specifically located on your thumb drive's drive letter.
+                </li>
+<li style="margin-bottom: 24px;">
+<strong>Set a Master Password:</strong> Choose a strong, memorable password. <em>Warning:</em> Because it uses true AES-256 encryption, there is no backdoor. If you lose this password, your data is gone forever.
+                </li>
+<li style="margin-bottom: 24px;">
+<strong>Move Your Files:</strong> Drag and drop your sensitive Word documents, spreadsheets, and photos into the open locker window. Close the locker when finished.
+                </li>
+</ol><figure class="content-visual compact"><img alt="Folder Lock 10 main lockers screenshot showing encrypted data vaults" loading="lazy" src="https://i.ibb.co/RGXFx5r3/folder-lock-10-screenshot-main-lockers.png"/></figure>
+<div style="margin: 32px 0; text-align: center;">
+<img alt="USB Secure software screen showing the step-by-step process of locking a USB drive" loading="lazy" src="https://i.ibb.co/1Y7Z4tmV/usb-secure-screen-1.png" style="width: 100%; max-width: 600px; height: auto; object-fit: contain; border-radius: var(--radius-card); box-shadow: var(--shadow-card);"/>
+</div>
+<p>Your thumb drive now contains a secure executable file. When you plug it into another PC, simply run that file, enter your password, and your data will temporarily mount for access.</p>
+</div>
+</section>
+<!-- Troubleshooting S16 -->
+<section class="section-pad bg-tint" id="troubleshooting">
+<div class="container-reading">
+<span class="section-badge">Owner Recovery</span>
+<h2>Troubleshooting &amp; Safe Recovery Notes</h2>
+<p>Dealing with encrypted data can be stressful if something goes wrong. Here are safe, official troubleshooting steps for common issues.</p>
+<h3 style="margin-top: 32px;">How to recover access to a password-protected thumb drive?</h3>
+<p>If you forgot your thumb drive password, the harsh reality of military-grade encryption is that there is no "crack" or bypass button. However, legitimate owners should try the following before formatting the drive:</p>
+<ul>
+<li><strong>Check your password manager:</strong> Ensure you didn't auto-save the master password in a tool like 1Password or Chrome Profiles.</li>
+<li><strong>Check caps lock and keyboard layouts:</strong> Passwords are strictly case-sensitive.</li>
+<li><strong>Search for a master key backup:</strong> Some enterprise deployments of BitLocker automatically save recovery keys to your Microsoft account. Log in online to check.</li>
+</ul>
+<p><em>Safety Note:</em> Do not download software claiming to "crack folder lock password" or bypass AES encryption. These are universally scams or malware vectors designed to steal your credentials.</p>
+<h3 style="margin-top: 32px;">The <a href="https://security.stackexchange.com/questions/118854/attacks-via-physical-access-to-usb-dma" rel="noopener noreferrer" target="_blank">BadUSB</a> Threat Vector</h3>
+<p>While protecting the data *on* the drive is crucial, you must also be aware of what a drive can do to your PC. BadUSB is an attack where a thumb drive's internal firmware is rewritten to act like a keyboard, injecting malicious commands instantly when plugged in. To protect against this, never plug in a random thumb drive found in public, even if you are just curious to see what is on it.</p><figure class="content-visual compact"><img alt="Blocked USB port security illustration for preventing malicious removable device attacks" loading="lazy" src="https://i.ibb.co/5XXFPSP1/The-Blocked-Port.jpg"/></figure>
+<div style="margin-top: 32px; text-align: center;">
+<img alt="Proactive data security concepts highlighting protection against threats like BadUSB" loading="lazy" src="https://i.ibb.co/V00KXtpW/folder-lock-10-social-media-ad-proactive-data-security.jpg" style="width: 100%; max-width: 600px; height: auto; object-fit: contain; border-radius: var(--radius-card); box-shadow: var(--shadow-card);"/>
+</div>
+</div>
+</section>
+<!-- Pricing V7 S13 -->
+<section class="section-pad" id="pricing">
+<div class="container-reading">
+<span class="section-badge">Cost Breakdown</span>
+<h2>Folder Lock Pricing: What You Get</h2>
+<div class="pricing-prose"><div class="pricing-matrix-head"><span>Version</span><span>Details</span><span>Action</span></div>
+<div class="pricing-tier"><h4>The Free Version</h4><p>Folder Lock offers a limited free tier to test the software. This allows you to create Lockers up to <strong>1 GB in size</strong> and sync across 2 devices. However, advanced features like unrestricted <em>Portable Lockers</em> (crucial for thumb drives) and secure sharing are restricted in this mode.</p><div><a class="btn btn-outline" href="https://www.newsoftwares.net/ns_download/folderlock10-en/folderlock10-en.exe" rel="noopener noreferrer" style="width: 100%; margin-top: 16px;" target="_blank">Download Free Version →</a></div></div>
+<div class="pricing-tier"><h4>The Pro Version</h4><p>For a one-time upgrade of <strong>$39.95</strong>, the Pro version removes all limitations. You get unlimited Locker sizes, syncing across up to 5 devices (including iOS and Android apps), and full access to the Portable USB Lockers and file shredding tools. This is the necessary tier for robust thumb drive security.</p><div><a class="btn btn-primary" href="https://store.newsoftwares.net/?add=fl10" rel="noopener noreferrer" style="width: 100%; margin-top: 16px;" target="_blank">View Full Version →</a></div></div>
+</div>
+<figure class="content-visual compact"><img alt="Folder Lock 10 Pro product boxshot for unlimited portable locker protection" loading="lazy" src="https://i.ibb.co/ksHyHDQV/folder-lock-10-pro-boxshot.png"/></figure></div>
+</section>
+<!-- Testimonials V1 S17 -->
+<section class="section-pad bg-tint">
+<div class="container-reading">
+<div class="testi-v1">
+                Having my tax documents on a thumb drive always made me nervous. Setting up a portable locker took three minutes, and now I know that even if I leave the drive at the library, my identity is perfectly safe.
+            </div>
+<div class="testi-author">— Sarah M., Independent Consultant</div>
+</div>
+</section>
+<!-- FAQ V5 S20 -->
+<section class="section-pad" id="faq">
+<div class="container-reading">
+<span class="section-badge">Common Questions</span>
+<h2>Frequently Asked Questions</h2><div class="faq-layout">
+<div aria-label="FAQ category filters" class="faq-filter">
+<button class="active" data-filter="all" type="button">All</button>
+<button data-filter="howto" type="button">How-to</button>
+<button data-filter="comparison" type="button">Comparison</button>
+<button data-filter="troubleshooting" type="button">Troubleshooting</button>
+</div>
+<div class="faq-v5-grid" style="margin-top: 40px;">
+<div class="chat-row" data-category="comparison">
+<div class="chat-q">What is the best free way to password protect a thumb drive?</div>
+<div class="chat-a">If you use Windows 10/11 Pro, BitLocker to Go is the best free, native option. If you are on Home edition, using 7-Zip to create an AES-256 password-protected archive of your files on the drive is a completely free (though slightly tedious) alternative.</div>
+</div>
+<div class="chat-row" data-category="howto">
+<div class="chat-q">How to password protect a thumb drive on Mac?</div>
+<div class="chat-a"><a href="https://techpp.com/2013/05/16/password-protect-encrypt-files-mac-windows/" rel="noopener noreferrer" target="_blank">Mac users</a> can use the built-in Disk Utility to format a thumb drive as "APFS (Encrypted)" or "Mac OS Extended (Journaled, Encrypted)." This natively password protects the drive, but it will no longer be readable on Windows computers.</div>
+</div>
+<div class="chat-row" data-category="troubleshooting">
+<div class="chat-q">Can a virus spread through a password-protected USB drive?</div>
+<div class="chat-a">Yes. While your specific encrypted container might be safe, the root directory of the thumb drive can still house auto-executing malware or Autorun viruses. Always scan external drives with updated antivirus software.</div>
+</div>
+<div class="chat-row" data-category="howto">
+<div class="chat-q">How to password protect a thumb drive without formatting?</div>
+<div class="chat-a">BitLocker and Mac Disk Utility usually require formatting to encrypt the whole drive. To protect files without wiping the drive, you must use software like Folder Lock to create a secure container *alongside* your existing unencrypted files.</div>
+</div>
+</div></div>
+
+</div>
+</section>
+<!-- Final CTA S22 -->
+<section class="section-pad bg-sage text-center">
+<div class="container-reading">
+<h2 style="font-size: 32px;">Secure Your Portable Data Today</h2><figure class="content-visual compact"><img alt="Security shield protecting portable data from unauthorized access" loading="lazy" src="https://i.ibb.co/bjywWFhL/security-shield-protecting.jpg"/></figure>
+<p style="font-size: 19px; max-width: 600px; margin: 0 auto 32px;">Don't wait until you lose a drive to start thinking about encryption. Lock down your sensitive files right now.</p>
+<div style="display: flex; justify-content: center; gap: 16px;">
+<a class="btn btn-primary" href="#">Try Folder Lock Free →</a>
+<a class="btn btn-outline" href="#">Get the Full Version →</a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="site-footer">
+<div class="footer-grid">
+<div><div class="footer-brand">
+<span aria-hidden="true" class="brand-logo">
+<svg focusable="false" role="img" viewbox="0 0 64 64">
+<path d="M32 6l20 8v15c0 13.4-8.2 23.8-20 29-11.8-5.2-20-15.6-20-29V14l20-8z" fill="#ffffff" opacity=".95"></path>
+<path d="M22 30h20v16H22z" fill="#2563EB"></path>
+<path d="M25 30v-6a7 7 0 0 1 14 0v6" fill="none" stroke="#0F1729" stroke-linecap="round" stroke-width="5"></path>
+<circle cx="32" cy="38" fill="#0F1729" r="3"></circle>
+</svg>
+</span>
+<h4 style="color: #ffffff; margin-bottom: 20px;">Thumb Drive Security Hub</h4></div>
+
+
+<p>The complete editorial guide to securing, encrypting, and managing portable storage devices.</p>
+</div>
+<div>
+<h4 style="color: #ffffff; margin-bottom: 20px;">Guide Sections</h4>
+<ul style="list-style: none; padding: 0;">
+<li><a href="#overview">Methods Overview</a></li>
+<li><a href="#tutorial">Step-by-Step Setup</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#faq">Security FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color: #ffffff; margin-bottom: 20px;">Related Tools</h4>
+<ul style="list-style: none; padding: 0;">
+<li><a href="https://www.newsoftwares.net/" rel="noopener noreferrer" target="_blank">Folder Lock Desktop</a></li>
+<li><a href="https://usb-secure.softonic.com.br/" rel="noopener noreferrer" target="_blank">USB Secure</a></li>
+<li><a href="https://www.24-7pressrelease.com/press-release/435143/newsoftwaresnet-releases-a-cloud-secure-password-protection-for-all-cloud-platforms" rel="noopener noreferrer" target="_blank">Cloud Secure</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-legal">
+<p style="margin-bottom: 16px;">This site operates as an independent editorial resource. Some links may earn a referral commission at no cost to you. Product recommendations reflect editorial judgment and independent assessment.</p>
+<p>Folder Lock is developed by <a href="https://newsoftwares.net/" rel="noopener noreferrer" target="_blank">NewSoftwares.net</a>.</p>
+<p>© 2026 Thumb Drive Security Hub. All rights reserved.</p>
+</div>
+</footer>
+<!-- Schema -->
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Password Protect a Thumb Drive — Easy Step-by-Step",
+      "author": {
+        "@type": "Organization",
+        "name": "Editorial Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ThumbDriveSecurityHub"
+      },
+      "datePublished": "2026-03-10",
+      "dateModified": "2026-03-10"
+    }
+    </script>
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is the best free way to password protect a thumb drive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you use Windows 10/11 Pro, BitLocker to Go is the best free, native option. If you are on Home edition, using 7-Zip to create an AES-256 password-protected archive of your files on the drive is a completely free alternative."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How to password protect a thumb drive on Mac?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mac users can use the built-in Disk Utility to format a thumb drive as 'APFS (Encrypted)' or 'Mac OS Extended (Journaled, Encrypted).' This natively password protects the drive, but it will no longer be readable on Windows computers."
+        }
+      }]
+    }
+    </script>
+<!-- Interactions -->
+<script defer="">
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('header');
+            const summaryBar = document.getElementById('data-summary-bar');
+            const hero = document.querySelector('.hero-section');
+
+            const onScroll = () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+
+                if (summaryBar && hero) {
+                    const heroBottom = hero.offsetTop + hero.offsetHeight - 80;
+                    summaryBar.classList.toggle('visible', window.scrollY > heroBottom);
+                }
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            const toggle = document.getElementById('mobile-toggle');
+            const menu = document.getElementById('mobile-menu');
+            if (toggle && menu) {
+                toggle.addEventListener('click', () => {
+                    menu.classList.toggle('active');
+                });
+            }
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (!targetId || targetId === '#') return;
+                    e.preventDefault();
+                    if (menu) menu.classList.remove('active');
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            const badgeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('badge-visible');
+                });
+            }, { threshold: 0.2 });
+            document.querySelectorAll('.section-badge').forEach(badge => badgeObserver.observe(badge));
+
+            const coverageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('coverage-visible');
+                });
+            }, { threshold: 0.35 });
+            document.querySelectorAll('.coverage-panel').forEach(panel => coverageObserver.observe(panel));
+
+            const animateNumber = (el) => {
+                const end = Number(el.dataset.count || 0);
+                const prefix = el.dataset.prefix || '';
+                const suffix = el.dataset.suffix || '';
+                const duration = 900;
+                const startTime = performance.now();
+                const tick = (now) => {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const value = Math.floor(progress * end);
+                    el.textContent = `${prefix}${value}${suffix}`;
+                    if (progress < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            };
+            document.querySelectorAll('.metric-number').forEach(animateNumber);
+
+            document.querySelectorAll('.method-summary').forEach(button => {
+                button.addEventListener('click', () => {
+                    const row = button.closest('.method-row');
+                    const isOpen = row.classList.toggle('active');
+                    button.setAttribute('aria-expanded', String(isOpen));
+                });
+            });
+
+            document.querySelectorAll('.comp-v5-table').forEach(table => {
+                const cells = table.querySelectorAll('th, td');
+                cells.forEach(cell => {
+                    cell.addEventListener('mouseenter', () => {
+                        const index = cell.cellIndex;
+                        table.querySelectorAll('tr').forEach(row => {
+                            const target = row.children[index];
+                            if (target) target.classList.add('is-col-hover');
+                        });
+                    });
+                    cell.addEventListener('mouseleave', () => {
+                        table.querySelectorAll('.is-col-hover').forEach(active => active.classList.remove('is-col-hover'));
+                    });
+                });
+            });
+
+            const filterButtons = document.querySelectorAll('.faq-filter button');
+            const faqRows = document.querySelectorAll('.chat-row[data-category]');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.dataset.filter;
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    faqRows.forEach(row => {
+                        row.classList.toggle('hidden', filter !== 'all' && row.dataset.category !== filter);
+                    });
+                });
+            });
+        });
+
+        let currentStep = 'step-1';
+        let platformContext = '';
+
+        function nextQuiz(nextStep, context) {
+            platformContext = context;
+            document.getElementById(currentStep).classList.remove('active');
+            document.getElementById(nextStep).classList.add('active');
+            currentStep = nextStep;
+        }
+
+        function showResult(type) {
+            document.getElementById(currentStep).classList.remove('active');
+            document.getElementById('result-step').classList.add('active');
+            currentStep = 'result-step';
+            const output = document.getElementById('quiz-output');
+            if (type === 'bitlocker') {
+                if (platformContext === 'cross') {
+                    output.innerHTML = "<strong>Result: Caution</strong><br><br>Free tools like BitLocker are powerful but not ideal for cross-platform use. Consider Folder Lock or a hardware-encrypted drive if you frequently switch between Mac and Windows.";
+                } else {
+                    output.innerHTML = "<strong>Result: BitLocker to Go</strong><br><br>If you have Windows Pro, this is the best free option. Right-click the drive in Explorer and select 'Turn on BitLocker' to begin.";
+                }
+            } else if (type === 'software') {
+                output.innerHTML = "<strong>Result: Dedicated Software (Folder Lock)</strong><br><br>This is the sweet spot. A premium tool like Folder Lock provides military-grade AES-256 encryption via Portable Lockers, allowing you to access files across different PCs without admin rights.";
+            } else {
+                output.innerHTML = "<strong>Result: Hardware-Encrypted USB Drive</strong><br><br>If budget is no issue, purchasing a physical drive with a built-in keypad (like an IronKey or Apricorn Aegis) provides maximum security immune to most host-PC software loggers.";
+            }
+        }
+
+        function resetQuiz() {
+            document.getElementById(currentStep).classList.remove('active');
+            document.getElementById('step-1').classList.add('active');
+            currentStep = 'step-1';
+            platformContext = '';
+        }
+</script>
+</body>
+</html>
